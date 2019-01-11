@@ -1,0 +1,44 @@
+<div class="row card card-block">
+        <div class="row">
+            <div class="col-lg-12 col-md-12" style="text-align: center;">
+                <h3> Manage Attendance Of Class</h3>
+            </div>
+            
+            <div class="col-lg-12 vol-md-12">
+                    <hr>
+                    <form class="form-group" #addclass="ngForm" (ngSubmit)="onClickSubmit(addclass.value)">
+                            <div class="col-md-5 form-group">
+                               <label class="control-label"> Admission Class</label>
+                               <ng-select
+                                [allowClear]="true" 
+                                [items]="items" 
+                                (data)="refreshValue($event)"
+                                (selected)="selected($event)"
+                                (removed)="removed($event)" 
+                                (typed)="typed($event)" 
+                                placeholder="No city selected">
+                               </ng-select>
+                            </div>
+                            <div class="col-md-5 form-group">
+                               <label class="control-label" >Section</label>
+                               <ng-select 
+                               [allowClear]="true" 
+                               [items]="sectionsList"
+                                [disabled]="disabled"
+                                 (data)="refreshSectionValue($event)"
+                               (selected)="selectedSection($event)"
+                               (removed)="removedSection($event)" (typed)="typedSection($event)" placeholder="No Section selected">
+                               </ng-select>
+                            </div>
+                            <div class="col-md-2 form-group" style="margin-top: 1em;">
+                               <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addclass.form.valid" value="Manage Attendance">
+                            </div>
+                    </form>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+
+            </div>
+           
+        </div>
+     </div>

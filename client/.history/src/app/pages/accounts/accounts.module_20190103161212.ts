@@ -1,0 +1,1 @@
+import { AccountsComponent } from './src/app/pages/accounts/accounts.component';

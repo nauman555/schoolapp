@@ -1,0 +1,28 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class TeachersDataService {
+    constructor() { }
+
+    DATA = [
+        {
+            id: 1,
+            name: 'English',
+            email: '1',
+            section: 'A',
+            teacher: 'Nazir',
+            subjectType: 'Core'
+         
+        },
+        {
+            id: 2,
+            subject: 'Maths',
+            class: '2',
+            section: 'A',
+            teacher: 'Ali',
+            subjectType: 'Elective'
+         
+        }
+    ];
+
+}

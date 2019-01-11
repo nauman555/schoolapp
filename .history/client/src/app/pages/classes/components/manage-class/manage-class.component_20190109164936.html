@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-md-12">
+      <card cardTitle="Data Table">
+          <tabset id="tab1">
+              <tab-content for="tab1" tabTitle="List Class" [active]="true">
+                  <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>Class Name</th>
+                          <th>Class Numeric Name</th>
+                         
+                          <th>Actions</th>
+               
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of classData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                          <td>{{item.class_name}}</td>
+                          <td>{{item.numeric_name}}</td>
+                          <td>
+                            <span class="label label-info" style="cursor: pointer;" (click)=openEditClassModal(updateClassModal,item.class_id)>Edit</span>
+                            <span class="label label-danger" style="cursor: pointer;">Delete</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+        
+              </tab-content>
+              <tab-content for="tab1" tabTitle={{tabtitle}}>
+                 <div class="row">
+                   <div class="col-lg-5 col-md-6 col-md-offset-3">
+                      <alert *ngIf="successNotification" type="success">Class Added Successfully..!</alert>
+                      <card cardTitle="Add Class">
+                          <form class="form-group"  #addclass ="ngForm" (ngSubmit) = "onSubmitAddClass(addclass)" >
+                            <label class="control-label"> Class Name *</label> 
+                             <span style="color:red;" *ngIf="!pickedCName.valid && pickedCName.touched"><small>  Class Name Required</small> </span>
+                              <span style="color:red;" *ngIf="classCheckAlert"><small style="margin-left: 1em;">  Class already added..! Add another class.</small> 
+                            </span>
+                              
+                            <input type="text" required class="form-control fm-control" (change)=checkClassAdded(this.c_name) name="c_name"
+                             placeholder="Class Name" [(ngModel)]="c_name" #pickedCName="ngModel"> 
+                              
+                            <label class="control-label">Class Numeric Name</label>
+                            <input type="text"   class="form-control fm-control"  name="numericC_name" placeholder="Numeric Name" ngModel>
+                            
+                            <label class="control-label" style="margin-bottom: .5em;">Class Teacher</label>
+                            <ng-select 
+                            [allowClear]=true
+                             [items]="teachersList" 
+                            (selected)="selectedTeacher($event)"
+                             placeholder="No Teacher selected">
+                            </ng-select>
+        
+                            <input type = "submit" class="btn btn-info" [disabled]="!addclass.form.valid || classCheckAlert" value = "Add class" style="margin-top: 1em;">
+                          </form>
+                        </card>
+                   </div>
+                 </div>
+                </tab-content>
+          </tabset>
+       
+      </card>
+    </div>
+  </div>
+  <modal #updateClassModal modalClass="modal-lg" >
+      <modal-header>
+        <h3>Update Class</h3>
+      </modal-header>
+      <modal-content >
+          <div class="row">
+              <div class="row">
+                  <div class="col-lg-7 col-md-7 col-md-offset-3">
+                     <alert *ngIf="successNotification" type="success">Class Updated Successfully..!</alert>
+                     <card cardTitle="Update Class">
+                         <form class="form-group"  #updateclass ="ngForm" (ngSubmit) = "onSubmitUpdateClass(updateclass)" >
+                           <label class="control-label"> Class Name *</label> 
+              
+                          
+                           <input type="text" readonly class="form-control fm-control"  name="class_name"
+                            placeholder="Class Name" [(ngModel)]="class_name" > 
+                            <input type="hidden"  class="form-control fm-control"  name="class_id"
+                        [(ngModel)]="class_id" > 
+                             
+                             
+                           <label class="control-label">Class Numeric Name</label>
+                           <input type="text"  [(ngModel)]="numeric_name"   class="form-control fm-control"  name="numeric_name" placeholder="Numeric Name" ngModel>
+                        
+                           <input type = "submit" class="btn btn-info"  value = "Update class" style="margin-top: 1em;">
+                         </form>
+                       </card>
+                  </div>
+                </div>
+          </div>
+           
+      
+      </modal-content>
+      <modal-footer>
+        <button class="btn btn-primary" (click)="closeModal(updateClassModal)">close</button>
+      </modal-footer>
+    </modal>

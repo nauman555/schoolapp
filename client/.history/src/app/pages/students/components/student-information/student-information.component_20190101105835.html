@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-md-12">
+      <card cardTitle="Students Profile">
+        <tabset id="tab1">
+          <tab-content for="tab1" tabTitle="Student Details" [active]="true">
+            <div class="row">
+              <div class="col-lg-2 col-md-2 col-sm-4">
+                <div class="list-group" style="padding-top: 0px; width: -webkit-fill-available;">
+  
+  
+                  <p class="list-group-item" style="background-color:#000000d4; color: white">
+                    <i class="fa fa-university"></i>
+                    <span>Select Class</span>
+                  </p>
+                  <a href="#" class="list-group-item">
+                    <span>Class 2</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 3</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 4</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 5</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 6</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 7</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 8</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 9</span>
+                  </a>
+  
+                </div>
+              </div>
+              <div class="col-lg-10 col-md-10 col-sm-12">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr><th> S.No</th>
+                        <th>Roll Number</th>
+                        <th>First Name </th>
+                        <th>Last Name </th>
+                        <th>Email </th>
+                        <th>Address</th>
+     
+                       <th>Class </th>
+                       <th>Section Name</th>
+                      
+                      <th>Actions</th>
+              
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of studentsInfo | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                        id: 1,
+                        rollnumber: 15352,
+                        class: 'Class 1',
+                        section : 'A',
+                        firstName : 'ALi',
+                        lastName: 'khan',
+                        username: '@mdo',
+                        email: 'mdo@gmail.com',
+                        address: 'Islamabad Pakistan'
+                      <td>{{index}}</td>
+                      <td>{{item.rollnumber}}</td>
+                      <td>{{item.firstName}}</td>
+                      <td>{{item.lastName}}</td>
+                 
+                    
+                      <td>{{item.username}}</td>
+                    
+                      <td>
+                        <span class="label label-info">Edit</span>
+                        <span class="label label-danger">Delete</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+  
+              </div>
+  
+            </div>
+  
+            <form class="pagination-wrapper">
+              <div class="form-group pages">
+                <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                  autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                  screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+              </div>
+              <div class="form-group options pages">
+                  <div class="input-group input-group-sm">
+                    <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+                      <option>1</option>
+                      <option>5</option>
+                      <option>10</option>
+                      <option>20</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option>200</option>
+                    </select>
+                    <span class="input-group-addon addon-right">Per Page</span>
+                  </div>
+                </div>
+            </form>
+          </tab-content>
+          
+        </tabset>
+  
+      </card>
+    </div>
+  </div>

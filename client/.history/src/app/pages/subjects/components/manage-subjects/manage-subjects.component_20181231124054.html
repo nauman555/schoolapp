@@ -1,0 +1,119 @@
+<div class="row">
+  <div class="col-md-12">
+    <card cardTitle="Manage Subjects">
+      <tabset id="tab1">
+        <tab-content for="tab1" tabTitle="Subject Details" [active]="true">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+              <div class="list-group" style="padding-top: 0px; width: -webkit-fill-available;">
+
+
+                <p class="list-group-item" style="background-color:#000000d4; color: white">
+                  <i class="fa fa-university"></i>
+                  <span>Select Class</span>
+                </p>
+                <a href="#" class="list-group-item">
+                  <span>Class 2</span>
+                </a>
+                <a href="#" class="list-group-item">
+                  <span>Class 3</span>
+                </a>
+                <a href="#" class="list-group-item">
+                  <span>Class 4</span>
+                </a>
+                <a href="#" class="list-group-item">
+                  <span>Class 5</span>
+                </a>
+                <a href="#" class="list-group-item">
+                  <span>Class 6</span>
+                </a>
+                <a href="#" class="list-group-item">
+                  <span>Class 7</span>
+                </a>
+                <a href="#" class="list-group-item">
+                  <span>Class 8</span>
+                </a>
+                <a href="#" class="list-group-item">
+                  <span>Class 9</span>
+                </a>
+
+              </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-8">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                      <th>Subject </th>
+                    <th>Class </th>
+                    <th>Section </th>
+                    <th>Teacher </th>
+                    <th>Actions</th>
+            
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of subjectsData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                    <td>{{item.subject}}</td>
+                    <td>{{item.class}}</td>
+                    <td>{{item.section}}</td>
+                    <td>{{item.teacher}}</td>
+                    <td>
+                      <span class="label label-info">Edit</span>
+                      <span class="label label-danger">Delete</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+
+          <form class="pagination-wrapper">
+            <div class="form-group pages">
+              <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                screenReaderCurrentLabel="You're on page">
+              </pagination-controls>
+            </div>
+
+          </form>
+        </tab-content>
+        <tab-content for="tab1" tabTitle={{tabtitle}}>
+          <div class="row">
+            <div class="col-lg-5 col-md-6 col-md-offset-3">
+              <card cardTitle="Add New Subject">
+                <form class="form-group" #addclass="ngForm" (ngSubmit)="onClickSubmit(addclass.value)">
+                  <label class="control-label"> Select Class</label>
+                  <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+                  (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+                </ng-select>
+            
+                  <label class="control-label" style="margin-top:.5em;">Section</label>
+                  <input type="text" style="margin-top:0em;" class="form-control fm-control" name="section" placeholder="Section Name" ngModel>
+
+                  <label class="control-label" >Teacher</label>
+                  <ng-select [allowClear]="true" [items]="teachersList" [disabled]="disabled" (data)="refreshTValue($event)" (selected)="selectedT($event)"
+                  (removed)="removedT($event)" (typed)="typedT($event)" placeholder="No Teacher selected">
+                </ng-select>
+
+                <label class="control-label" style="margin-top:.5em;">Subject Name</label>
+                <input type="text" style="margin-top:0em;" class="form-control fm-control" name="subject" placeholder="Subject Name" ngModel>
+
+                <label class="control-label" style="margin-top:.5em;">Subject Type</label>
+                <input class="radio" type="radio" id="default-radio1" name="radio" checked>
+                <label class="radio-label" for="default-radio1">Radio1</label>
+                <input class="radio" type="radio" id="default-radio1" name="radio" checked>
+                <label class="radio-label" for="default-radio1">Radio1</label>
+
+                  <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addclass.form.valid" value="Add Section">
+                </form>
+              </card>
+            </div>
+          </div>
+        </tab-content>
+      </tabset>
+
+    </card>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="card card-block login-card">
+  <h3 class="form-label">Welcome Back</h3>
+  <span class="form-label">sign in</span>
+  
+  <form class="form-group"  #login ="ngForm" (ngSubmit) = "onClickSubmit(login.value)" >
+    <div class="input-group">
+      <span class="input-group-addon addon-left" id="Email">
+        <i class="fa fa-user fa-fw"></i>
+      </span>
+      <input class="form-control with-primary-addon" placeholder="User Email" name="useremail" required type="email" [(ngModel)]="useremail" #pickedName="ngModel">
+    </div>
+    <p class="alert alert-danger" *ngIf="!pickedName.valid && pickedName.touched">
+        Email is required!
+      </p> 
+    <div class="input-group">
+      <span class="input-group-addon addon-left" id="password">
+        <i class="fa fa-lock fa-fw"></i>
+      </span>
+      <input class="form-control with-primary-addon" placeholder="Password" name="userPassword" type="password" required [(ngModel)]="userPassword" #pickedPassword="ngModel">
+    </div>
+    <p class="alert alert-danger" *ngIf="!pickedPassword.valid && pickedPassword.touched">
+      Password is required!
+    </p> 
+
+    <input type = "submit" class="btn btn-primary" [disabled]="!login.form.valid" value = "Login →">
+    <a href="" class="btn btn-link">Forget Password </a>
+  </form>
+</div>

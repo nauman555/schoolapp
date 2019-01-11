@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-md-12">
+      <card cardTitle="Admit Students">
+       
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-md-offset-2">
+                <card cardTitle="Admission Form">
+                  <form class="form-group" #addclass="ngForm" (ngSubmit)="onClickSubmit(addclass.value)">
+                      <label class="control-label" style="margin-top:.5em;">Student Name</label>
+                      <input type="text" style="margin-top:0em;" class="form-control fm-control" name="std_name" placeholder="Student Name" ngModel>
+    
+                      <label class="control-label" style="margin-top:.5em;">Student Email</label>
+                      <input type="text" style="margin-top:0em;" class="form-control fm-control" name="std_email" placeholder="Student Email" ngModel>
+    
+                      <label class="control-label" style="margin-top:.5em;">User Name</label>
+                      <input type="text" style="margin-top:0em;" class="form-control fm-control" name="std_userName" placeholder="User Name" ngModel>
+
+                      <label class="control-label" style="margin-top:1em;">Gender</label>
+                      <input class="radio" type="radio" id="gender-radio1" name="std_gender" > 
+                      <label class="radio-label" for="gender-radio1" >Male</label>
+                      <input class="radio" type="radio" id="gender-radio2" name="std_gender" >
+                      <label class="radio-label" for="gender-radio2" >Female</label>
+    
+                      <label class="control-label" style="margin-top:1em;">Date Of Birth</label>
+                      <input type="date" style="margin-top:0em;" class="form-control fm-control" name="std_dob" ngModel>
+                      <label class="control-label" style="margin-top:1em;" >Parent Details <small style="color: brown">  ( If Parent details not found than add parent details from Parent section )</small></label>
+                      <ng-select [allowClear]="true" [items]="teachersList" [disabled]="disabled" (data)="refreshTValue($event)" (selected)="selectedT($event)"
+                      (removed)="removedT($event)" (typed)="typedT($event)" placeholder="No Parent selected">
+                    </ng-select>
+    
+                   
+                    <label class="control-label" style="margin-top:1.5em;">Parent Mobile Number</label>
+                    <input type="text" style="margin-top:0em;" class="form-control fm-control" name="parent_cell" placeholder="Parent Mobile Number" ngModel>
+  
+                    <label class="control-label" style="margin-top:1em;">Parent Email</label>
+                    <input type="text" style="margin-top:0em;" class="form-control fm-control" name="parent_email" placeholder="Parent Email" ngModel>
+  
+                    <label class="control-label" style="margin-top:1em;">Parent Profession Name</label>
+                    <input type="text" style="margin-top:0em;" class="form-control fm-control" name="parent_prof" placeholder="Parent Profession" ngModel>
+                      <label class="control-label" style="margin-top:1em;">Address</label>
+                      <input type="text" style="margin-top:0em;" class="form-control fm-control" name="std_address" placeholder="Student Address" ngModel>
+
+                    <label class="control-label"> Admission Class</label>
+                    <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+                    (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+                  </ng-select>
+              
+                    <label class="control-label" style="margin-top:1em;">Admission Section</label>
+                    <ng-select [allowClear]="true" [items]="sectionsList" [disabled]="disabled" (data)="refreshSectionValue($event)" (selected)="selectedSection($event)"
+                    (removed)="removedSection($event)" (typed)="typedSection($event)" placeholder="No Section selected">
+                  </ng-select>
+  
+         
+
+                  <label class="control-label" style="margin-top:1em;">Enroll Date</label>
+                  <input type="date" style="margin-top:0em;" class="form-control fm-control" name="enroll_date"  ngModel>
+                
+                  <label class="control-label" style="margin-top:1em;">Enroll Date</label>
+                  <input type="date" style="margin-top:0em;" class="form-control fm-control" name="enroll_date"  ngModel>
+  
+                  <label class="control-label" style="margin-top:1em;">Subject Type</label>
+                  <input class="radio" type="radio" id="default-radio1" name="radio" > 
+                  <label class="radio-label" for="default-radio1">Core</label>
+                  <input class="radio" type="radio" id="default-radio2" name="radio" >
+                  <label class="radio-label" for="default-radio2">Elective</label>
+  
+                    <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addclass.form.valid" value="Add Subject">
+                  </form>
+                </card>
+              </div>
+            </div>
+    
+  
+      </card>
+    </div>
+  </div>

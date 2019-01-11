@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-md-12">
+         
+                    <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+                      (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+                    </ng-select>
+                
+    </div>
+  </div>

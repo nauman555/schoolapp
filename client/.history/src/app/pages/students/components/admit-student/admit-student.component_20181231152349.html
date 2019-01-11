@@ -1,0 +1,33 @@
+   <div class="row">
+              <div class="col-lg-5 col-md-6 col-md-offset-3">
+                <card cardTitle="Add New Subject">
+                  <form class="form-group" #addclass="ngForm" (ngSubmit)="onClickSubmit(addclass.value)">
+                    <label class="control-label"> Select Class</label>
+                    <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+                    (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+                  </ng-select>
+              
+                    <label class="control-label" style="margin-top:.5em;">Section</label>
+                    <ng-select [allowClear]="true" [items]="sectionsList" [disabled]="disabled" (data)="refreshSectionValue($event)" (selected)="selectedSection($event)"
+                    (removed)="removedSection($event)" (typed)="typedSection($event)" placeholder="No Section selected">
+                  </ng-select>
+  
+                    <label class="control-label" >Teacher</label>
+                    <ng-select [allowClear]="true" [items]="teachersList" [disabled]="disabled" (data)="refreshTValue($event)" (selected)="selectedT($event)"
+                    (removed)="removedT($event)" (typed)="typedT($event)" placeholder="No Teacher selected">
+                  </ng-select>
+  
+                  <label class="control-label" style="margin-top:.5em;">Subject Name</label>
+                  <input type="text" style="margin-top:0em;" class="form-control fm-control" name="subject" placeholder="Subject Name" ngModel>
+  
+                  <label class="control-label" style="margin-top:.5em;">Subject Type</label>
+                  <input class="radio" type="radio" id="default-radio1" name="radio" > 
+                  <label class="radio-label" for="default-radio1">Core</label>
+                  <input class="radio" type="radio" id="default-radio2" name="radio" >
+                  <label class="radio-label" for="default-radio2">Elective</label>
+  
+                    <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addclass.form.valid" value="Add Subject">
+                  </form>
+                </card>
+              </div>
+            </div>

@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-md-12">
+      <card cardTitle="Data Table">
+          <tabset id="tab1">
+              <tab-content for="tab1" tabTitle="List Class" [active]="true">
+                  <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>Class Name</th>
+                          <th>Class Numeric Name</th>
+                         
+                          <th>Actions</th>
+               
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of classData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                          <td>{{item.class_name}}</td>
+                          <td>{{item.numeric_name}}</td>
+
+                         
+                          <td>
+                            <span class="label label-info">Edit</span>
+                            <span class="label label-danger">Delete</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <form class="pagination-wrapper">
+                      <div class="form-group pages">
+                        <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                          autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                          screenReaderCurrentLabel="You're on page">
+                        </pagination-controls>
+                      </div>
+                      <div class="form-group options pages">
+                        <div class="input-group input-group-sm">
+                          <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+                            <option>1</option>
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                            <option>200</option>
+                          </select>
+                          <span class="input-group-addon addon-right">Per Page</span>
+                        </div>
+                      </div>
+                    </form>
+              </tab-content>
+              <tab-content for="tab1" tabTitle={{tabtitle}}>
+                 <div class="row">
+                   <div class="col-lg-5 col-md-6 col-md-offset-3">
+                      <alert *ngIf="successNotification" type="success">Class Added Successfully..!</alert>
+                      <card cardTitle="Add Class">
+                          <form class="form-group"  #addclass ="ngForm" (ngSubmit) = "onSubmitAddClass(addclass)" >
+                            <label class="control-label"> Class Name *</label> 
+                             <span style="color:red;" *ngIf="!pickedName.valid && pickedName.touched"><small>  Class Name Required</small> </span>
+                              <span style="color:red;" *ngIf="classCheckAlert"><small style="margin-left: 1em;">  Class already added..! Add another class.</small> 
+                            </span>
+                              
+                            <input type="text" required class="form-control fm-control" (change)=checkClassAdded(this.c_name) name="c_name"
+                             placeholder="Class Name" [(ngModel)]="c_name" #pickedName="ngModel"> 
+                              
+                            <label class="control-label">Class Numeric Name</label>
+                            <input type="text"   class="form-control fm-control"  name="numericC_name" placeholder="Numeric Name" ngModel>
+                            
+                            <label class="control-label" style="margin-bottom: .5em;">Class Teacher</label>
+                            <ng-select 
+                            [allowClear]=clearTDD
+                             [items]="teachersList" 
+                            [disabled]="disabled" 
+                            
+                            (selected)="selectedTeacher($event)"
+                           
+                            
+                             placeholder="No Teacher selected">
+                            </ng-select>
+        
+                            <input type = "submit" class="btn btn-info" [disabled]="!addclass.form.valid || classCheckAlert" value = "Add class" style="margin-top: 1em;">
+                          </form>
+                        </card>
+                   </div>
+                 </div>
+                </tab-content>
+          </tabset>
+       
+      </card>
+    </div>
+  </div>
+  

@@ -1,0 +1,37 @@
+<div class="row">
+        <div class="col-md-12">
+           <card cardTitle="Student Promotion">
+              <div class="row">
+                 <div class="col-md-8">
+                    <div class="row card card-block">
+                       <form class="form-group" #addclass="ngForm" (ngSubmit)="onClickSubmit(addclass.value)">
+                       <div class="col-md-6 form-group">
+                          <label class="control-label" style="margin-top:1em;">Current Session <small style="color: brown">  ( You can change enroll session year from Settings )</small></label>
+                          <input type="text" style="margin-top:0em;" [(ngModel)]="defaultsession" readonly class="form-control fm-control" name="enroll_session"  >
+                       </div>
+                       <div class="col-md-6 form-group">
+                          <label class="control-label" style="margin-top:1em;">Promote To Session <small style="color: brown">  ( You can change enroll session year from Settings )</small></label>
+                          <input type="text" style="margin-top:0em;" [(ngModel)]="defaultsession" readonly class="form-control fm-control" name="enroll_session"  >
+                       </div>
+                       <div class="col-md-6 form-group">
+                          <label class="control-label"> Promotion From Class</label>
+                          <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+                          (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+                          </ng-select>
+                       </div>
+                       <div class="col-md-6 form-group">
+                          <label class="control-label" >Promotion To Class</label>
+                          <ng-select [allowClear]="true" [items]="sectionsList" [disabled]="disabled" (data)="refreshSectionValue($event)" (selected)="selectedSection($event)"
+                          (removed)="removedSection($event)" (typed)="typedSection($event)" placeholder="No Section selected">
+                          </ng-select>
+                       </div>
+                       <div class="col-md-12 form-group">
+                          <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addclass.form.valid" value="Manage Promotions">
+                       </div>
+                       </form>
+                    </div>
+                 </div>
+              </div>
+           </card>
+        </div>
+     </div>

@@ -1,0 +1,71 @@
+<div class="row">
+        <div class="col-md-12">
+           <card cardTitle="Student Promotion">
+                <alert type="info"> <b>Student Promotion Notes: </b>
+
+                        Promoting student from the present class to the next class will create an enrollment of
+                         that student to the next session. Make sure to select correct class options from the select
+                          menu before promoting.If you don't want to promote a student to the next class, please select
+                          same class from option. That will not promote the student to the next class but it will create an enrollment
+                            to the next session but in the same class.</alert>
+              <div class="row">
+                 <div class="col-md-12">
+                    <div class="row card card-block">
+                       <form class="form-group" #addclass="ngForm" (ngSubmit)="onClickSubmit(addclass.value)">
+                       <div class="col-md-6 form-group">
+                          <label class="control-label" style="margin-top:1em;">Current Session </label>
+                          <input type="text" style="margin-top:0em;" [(ngModel)]="defaultsession" readonly class="form-control fm-control" name="enroll_session"  >
+                       </div>
+                       <div class="col-md-6 form-group">
+                          <label class="control-label" style="margin-top:1em;">Promote To Next Session <small style="color: brown">  (If Next Session is empty than add next session from Settings )</small></label>
+                          <input type="text" style="margin-top:0em;" [(ngModel)]="nextSession" readonly class="form-control fm-control" name="promote_session"  >
+                       </div>
+                       <div class="col-md-6 form-group">
+                          <label class="control-label"> Promotion From Class</label>
+                          <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+                          (removed)="removed($event)" (typed)="typed($event)" placeholder="No class selected">
+                          </ng-select>
+                       </div>
+                       <div class="col-md-6 form-group">
+                            <label class="control-label"> Promotion From Class</label>
+                            <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+                            (removed)="removed($event)" (typed)="typed($event)" placeholder="No class selected">
+                            </ng-select>
+                         </div>
+                       <div class="col-md-6 col-md-offset-5 form-group">
+                          <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addclass.form.valid" value="Manage Promotions">
+                       </div>
+                       </form>
+                    </div>
+                 </div>
+
+                 <div class="col-md-12 col-lg-12">
+                     <h4></h4>
+                        <table class="table table-hover">
+                                <thead>
+                                  <tr>
+                                   
+                
+                                    <th>Subject</th>
+                                    <th>Total Marks</th>
+                                    <th>Obtained Marks</th>
+                                    <th>Percentage</th>
+                                    <th>Status</th>
+                                    <th>Exam Date</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  
+                                    
+                                   
+                               
+                                </tbody>
+                              </table>
+                 </div>
+              </div>
+           </card>
+
+     
+        </div>
+     </div>

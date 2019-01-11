@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-12">
+      <card cardTitle="Exams Info">
+          <tabset id="tab1">
+              <tab-content for="tab1" tabTitle="List Exams" [active]="true">
+                  <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>Exam Name</th>
+                          <th>Date</th>
+                          <th>Comment</th>
+                          <th>Actions</th>
+               
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of examData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                          <td>{{item.examName}}</td>
+                          <td>{{item.examDate}}</td>
+                          <td>{{item.comment}}</td>
+                         
+                          <td>
+                            <span class="label label-info">Edit</span>
+                            <span class="label label-danger">Delete</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+           
+              </tab-content>
+              <tab-content for="tab1" tabTitle={{tabtitle}}>
+                 <div class="row">
+                   <div class="col-lg-5 col-md-6 col-md-offset-3">
+                      <card cardTitle="Add Exam">
+                          <form class="form-group"  #addclass ="ngForm" (ngSubmit) = "onClickSubmit(addclass.value)" >
+                            <label class="control-label"> Exam Name</label>  
+                              
+                            <input type="text" required class="form-control fm-control" name="examName"
+                             placeholder="Class Name" [(ngModel)]="examName" #pickedName="ngModel">
+                              <p class="alert alert-danger" *ngIf="!pickedName.valid && pickedName.touched" style="margin-top:1em; margin-left:0em;">
+                                Exam name is required!
+                              </p> 
+                          
+                            <label class="control-label">Exam Date</label>
+                            <input type="date"   class="form-control fm-control" name="examDate" placeholder="Numeric Name" ngModel>
+                            
+                            <label class="control-label" style="margin-bottom: .5em;">Class Teacher</label>
+                            <ng-select [allowClear]="true" [items]="teachersList" [disabled]="disabled" (data)="refreshTValue($event)" (selected)="selectedT($event)"
+                            (removed)="removedT($event)" (typed)="typedT($event)" placeholder="No Teacher selected">
+                          </ng-select>
+        
+                            <input type = "submit" class="btn btn-info" [disabled]="!addclass.form.valid" value = "Add class" style="margin-top: 1em;">
+                          </form>
+                        </card>
+                   </div>
+                 </div>
+                </tab-content>
+          </tabset>
+       
+      </card>
+    </div>
+  </div>
+  

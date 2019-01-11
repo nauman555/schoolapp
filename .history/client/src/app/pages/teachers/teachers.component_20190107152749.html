@@ -1,0 +1,121 @@
+<div class="row">
+        <div class="col-md-12">
+           <card cardTitle="Teachers Data">
+              <tabset id="tab1">
+                 <tab-content for="tab1" tabTitle="List Teachers" [active]="true">
+                    <table class="table table-bordered table-hover">
+                       <thead>
+                          <tr>
+                             <th># </th>
+                             <th>Name </th>
+                             <th>Email </th>
+                             <th>Designation </th>
+                             <th>Phone Number </th>
+                             <th>Address</th>
+                             <th>Qualification</th>
+                             <th>Actions</th>
+                          </tr>
+                       </thead>
+                       <tbody>
+                          <tr *ngFor="let item of teachersDataList | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                             <td>{{index + 1}}</td>
+                             <td>{{item.teacher_name}}</td>
+                             <td>{{item.email}}</td>
+                             <td>{{item.teacher_desig}}</td>
+                             <td>{{item.phone_num}}</td>
+                             <td>{{item.address}}</td>
+                             <td>{{item.teacher_qual}}</td>
+                             <td>
+                                <span class="label label-info">Edit</span>
+                                <span class="label label-danger">Delete</span>
+                             </td>
+                          </tr>
+                       </tbody>
+                    </table>
+                    <form class="pagination-wrapper">
+                       <div class="form-group pages">
+                          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                             autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                             screenReaderCurrentLabel="You're on page">
+                          </pagination-controls>
+                       </div>
+                       <div class="form-group options pages">
+                          <div class="input-group input-group-sm">
+                             <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+                             <option>1</option>
+                             <option>5</option>
+                             <option>10</option>
+                             <option>20</option>
+                             <option>50</option>
+                             <option>100</option>
+                             <option>200</option>
+                             </select>
+                             <span class="input-group-addon addon-right">Per Page</span>
+                          </div>
+                       </div>
+                    </form>
+                 </tab-content>
+                 <tab-content for="tab1" tabTitle='Add Teacher'>
+                    <div class="row">
+                       <div class="col-lg-8 col-md-8 col-md-offset-2">
+                          <div class="row card card-block">
+                             <form class="form-group" #addteacher="ngForm" (ngSubmit)="onSubmitA(addteacher.value)">
+                             <div class="col-md-6 form-group">
+                                <label class="control-label" style="margin-top:.5em;">First Name</label>
+                                <input type="text" style="margin-top:0em;" class="form-control fm-control" name="t_firstName" placeholder="First Name" ngModel>
+                             </div>
+                             <div class="col-md-6 form-group">
+                                <label class="control-label" style="margin-top:.5em;">Last Name</label>
+                                <input type="text" style="margin-top:0em;" class="form-control fm-control" name="t_lastName" placeholder="Last Name" ngModel>
+                             </div>
+                             <div class="col-md-6 form-group">
+                                <label class="control-label" style="margin-top:.5em;"> Email</label>
+                                <input type="text" style="margin-top:0em;" class="form-control fm-control" name="t_email" placeholder="Teacher Email" ngModel>
+                             </div>
+                             <div class="col-md-6 form-group">
+                                <label class="control-label" style="margin-top:.5em;">Password</label>
+                                <input type="text" style="margin-top:0em;" class="form-control fm-control" name="t_password"  ngModel>
+                             </div>
+                             <div class="col-md-6 form-group">
+                                    <label class="control-label" style="margin-top:1em;">Qulification</label>
+                                    <input type="text" style="margin-top:0em;" class="form-control fm-control" name="t_qualification" placeholder="Qulification" ngModel>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="control-label" style="margin-top:1em;">Designation</label>
+                                <input type="text" style="margin-top:0em;" class="form-control fm-control" name="designation" placeholder="Designation" ngModel>
+                            </div>
+                             <div class="col-md-4 form-group">
+                                <label class="control-label" style="margin-top:1em;">Gender</label>
+                                <input class="radio" type="radio" id="gender-radio1" name="t_gender" ngModel> 
+                                <label class="radio-label" for="gender-radio1" >Male</label>
+                                <input class="radio" type="radio" id="gender-radio2" name="t_gender" ngModel >
+                                <label class="radio-label" for="gender-radio2" >Female</label>
+                             </div>
+                             <div class="col-md-4 form-group">
+                                <label class="control-label" style="margin-top:1em;">Date Of Birth</label>
+                                <input type="date" style="margin-top:0em;" class="form-control fm-control" name="std_dob" ngModel>
+                             </div>
+                             <div class="col-md-4 form-group">
+                                <label class="control-label" style="margin-top:1em;">Phone Number</label>
+                                <input type="text" style="margin-top:0em;" class="form-control fm-control" name="phone_number" placeholder="Phone Number" ngModel>
+                             </div>
+                        
+
+                     
+                             <div class="col-md-12 form-group">
+                                <label class="control-label" style="margin-top:1em;">Address</label>
+                                <input type="text" style="margin-top:0em;" class="form-control fm-control" name="std_address" placeholder="Student Address" ngModel>
+                             </div>
+                        
+                             <div class="col-md-12 form-group">
+                                <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addteacher.form.valid" value="Add Teacher">
+                             </div>
+                             </form>
+                          </div>
+                       </div>
+                    </div>
+                 </tab-content>
+              </tabset>
+           </card>
+        </div>
+     </div>

@@ -1,0 +1,376 @@
+<div class="row">
+    <div class="col-md-12">
+      <card cardTitle="Students Profile">
+        <tabset id="tab1">
+          <tab-content for="tab1" tabTitle="Student Details" [active]="true">
+            <div class="row">
+              <div class="col-lg-2 col-md-2 col-sm-4">
+                <div class="list-group" style="padding-top: 0px; width: -webkit-fill-available;">
+  
+  
+                  <p class="list-group-item" style="background-color:#000000d4; color: white">
+                    <i class="fa fa-university"></i>
+                    <span>Select Class</span>
+                  </p>
+                  <a href="#" class="list-group-item">
+                    <span>Class 2</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 3</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 4</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 5</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 6</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 7</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 8</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 9</span>
+                  </a>
+  
+                </div>
+              </div>
+              <div class="col-lg-10 col-md-10 col-sm-12">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr><th> S.No</th>
+                        <th>Roll Number</th>
+                        <th>First Name </th>
+                        <th>Last Name </th>
+                        <th>Email </th>
+                        <th>Address</th>
+     
+                       <th>Class </th>
+                       <th>Section Name</th>
+                      
+                      <th>Actions</th>
+              
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of studentsInfo | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                   
+                      <td>{{index + 1}}</td>
+                      <td>{{item.rollnumber}}</td>
+                      <td>{{item.firstName}}</td>
+                      <td>{{item.lastName}}</td>
+                      <td>{{item.email}}</td>
+                      <td>{{item.address}}</td>
+                      <td>{{item.class}}</td>
+                      <td>{{item.section}}</td>
+                    
+                      <td>
+                        <span style="cursor: pointer;" class="label label-info">Edit</span>
+                        <span style="cursor: pointer;" class="label label-danger">Delete</span>
+                    
+                        <span style="cursor: pointer;" class="label label-warning" (click)="fifthModal.open()">Profile</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+  
+              </div>
+  
+            </div>
+  
+            <form class="pagination-wrapper">
+              <div class="form-group pages">
+                <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                  autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                  screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+              </div>
+              <div class="form-group options pages">
+                  <div class="input-group input-group-sm">
+                    <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+                      <option>1</option>
+                      <option>5</option>
+                      <option>10</option>
+                      <option>20</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option>200</option>
+                    </select>
+                    <span class="input-group-addon addon-right">Per Page</span>
+                  </div>
+                </div>
+            </form>
+          </tab-content>
+          
+        </tabset>
+
+        
+  
+      </card>
+    </div>
+  </div>
+  <modal #fifthModal modalClass="modal-lg">
+      <modal-header>
+        <h3>Student Profile</h3>
+      </modal-header>
+      <modal-content style="width: 1050px !important">
+          <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                  <div class="card">
+                      <div class="profile-wrap animated fadeIn">
+                        <div class="info-wrap">
+                          <div class="avatar-wrap">
+                            <img src="{{avatarImgSrc}}" alt="avatar">
+                          </div>
+                          <span class="user-name">{{userName}}</span>
+                          <span class="user-post">{{userPost}}</span>
+                       
+                        </div>
+                        <div class="profile-head">
+                          <img src="{{avatarImgSrc}}" alt="profile-head-bg" class="profile-head-bg">
+                        </div>
+                        <div class="profile-foot">
+                          <h4>Ali </h4>
+                 
+                          <h4>Class 1 | Section A</h4>
+         
+                        </div>
+                      </div>
+                    </div>
+                    
+                </div>
+              <div class="col-lg-9 col-md-9 col-sm-10">
+          <tabset id="tab2">
+              <tab-content for="tab2" tabTitle="Basic Info" [active]="true">
+               
+                  <card cardTitle="Basic Info">
+                      <table class="table table-hover">
+                    
+                          <tr>
+                           
+                            <th>LASTNAME</th>
+                            <th>USERNAME</th>
+                          </tr>
+                     
+                   
+                            <tr *ngFor="let item of studentsInfo">
+                            <td>{{index + 1}}</td>
+                            <td>{{item.first_name}}</td>
+                            <td>{{item.last_name}}</td>
+                            <td>{{item.user_name}}</td>
+                          </tr>
+                        
+                      </table>
+                      <table class="table table-hover">
+                    
+                          <tr>
+                           
+                            <th>LASTNAME</th>
+                            <th>USERNAME</th>
+                          </tr>
+                     
+                   
+                            <tr *ngFor="let item of studentsInfo">
+                            <td>{{index}}</td>
+                            <td>{{item.first_name}}</td>
+                            <td>{{item.last_name}}</td>
+                            <td>{{item.user_name}}</td>
+                          </tr>
+                        
+                      </table>
+                    </card>
+    
+              </tab-content>
+
+              <tab-content for="tab2" tabTitle="Parent Info" >
+               
+                  <card cardTitle="Basic Info">
+                      <table class="table table-hover">
+                    
+                          <tr>
+                           
+                            <th>LASTNAME</th>
+                            <th>USERNAME</th>
+                          </tr>
+                     
+                   
+                            <tr *ngFor="let item of studentsInfo">
+                            <td>{{index}}</td>
+                            <td>{{item.first_name}}</td>
+                            <td>{{item.last_name}}</td>
+                            <td>{{item.user_name}}</td>
+                          </tr>
+                        
+                      </table>
+                      <table class="table table-hover">
+                    
+                          <tr>
+                           
+                            <th>LASTNAME</th>
+                            <th>USERNAME</th>
+                          </tr>
+                     
+                   
+                            <tr *ngFor="let item of studentsInfo">
+                            <td>{{index}}</td>
+                            <td>{{item.first_name}}</td>
+                            <td>{{item.last_name}}</td>
+                            <td>{{item.user_name}}</td>
+                          </tr>
+                        
+                      </table>
+                    </card>
+    
+              </tab-content>
+
+              <tab-content for="tab2" tabTitle="Exam Marks" >
+               
+                  <card cardTitle="Final Exam">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                           
+
+                            <th>Subject</th>
+                            <th>Total Marks</th>
+                            <th>Obtained Marks</th>
+                            <th>Percentage</th>
+                            <th>Status</th>
+                            <th>Exam Date</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of exam_marks; let index = index">
+                            
+                           
+                            <td>{{item.subject}}</td>
+                            <td>{{item.t_marks}}</td>
+                            <td>{{item.obt_marks}}</td>
+                            <td>{{item.percentage}}</td>
+                            <td>{{item.status}}</td>
+                            <td>{{item.exame_dt}}</td>
+                           
+                          </tr>
+                        </tbody>
+                      </table>
+                      <h4> Total Marks: 120</h4>
+                      <h4>Obtained Marks</h4>
+                    </card>
+
+                    <card cardTitle="Midterm Exam">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                             
+  
+                              <th>Subject</th>
+                              <th>Total Marks</th>
+                              <th>Obtained Marks</th>
+                              <th>Percentage</th>
+                              <th>Status</th>
+                              <th>Exam Date</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of exam_marks; let index = index">
+                              
+                             
+                              <td>{{item.subject}}</td>
+                              <td>{{item.t_marks}}</td>
+                              <td>{{item.obt_marks}}</td>
+                              <td>{{item.percentage}}</td>
+                              <td>{{item.status}}</td>
+                              <td>{{item.exame_dt}}</td>
+                             
+                            </tr>
+                          </tbody>
+                        </table>
+                      </card>
+                      <card cardTitle="Quiz 1">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                               
+    
+                                <th>Subject</th>
+                                <th>Total Marks</th>
+                                <th>Obtained Marks</th>
+                                <th>Percentage</th>
+                                <th>Status</th>
+                                <th>Exam Date</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of exam_marks; let index = index">
+                                
+                               
+                                <td>{{item.subject}}</td>
+                                <td>{{item.t_marks}}</td>
+                                <td>{{item.obt_marks}}</td>
+                                <td>{{item.percentage}}</td>
+                                <td>{{item.status}}</td>
+                                <td>{{item.exame_dt}}</td>
+                               
+                              </tr>
+                            </tbody>
+                          </table>
+                        </card>
+    
+              </tab-content>
+              <tab-content for="tab2" tabTitle="Payment Info" >
+               
+                  <card cardTitle="Basic Info">
+                      <table class="table table-hover">
+                    
+                          <tr>
+                           
+                            <th>LASTNAME</th>
+                            <th>USERNAME</th>
+                          </tr>
+                     
+                   
+                            <tr *ngFor="let item of studentsInfo">
+                            <td>{{index}}</td>
+                            <td>{{item.first_name}}</td>
+                            <td>{{item.last_name}}</td>
+                            <td>{{item.user_name}}</td>
+                          </tr>
+                        
+                      </table>
+                      <table class="table table-hover">
+                    
+                          <tr>
+                           
+                            <th>LASTNAME</th>
+                            <th>USERNAME</th>
+                          </tr>
+                     
+                   
+                            <tr *ngFor="let item of studentsInfo">
+                            <td>{{index}}</td>
+                            <td>{{item.first_name}}</td>
+                            <td>{{item.last_name}}</td>
+                            <td>{{item.user_name}}</td>
+                          </tr>
+                        
+                      </table>
+                    </card>
+    
+              </tab-content>
+              
+            </tabset>
+          </div>
+      
+        </div>
+      </modal-content>
+      <modal-footer>
+        <button class="btn btn-primary" (click)="closeModal(fifthModal)">close</button>
+      </modal-footer>
+    </modal>

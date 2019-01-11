@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-12">
+      <card cardTitle="Manage Attendance Of Class">
+       
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card card-block">
+                     <form class="form-group" #addclass="ngForm" (ngSubmit)="onClickSubmit(addclass.value)">
+                     
+                      <div class="col-md-4 form-group">
+                          <label class="control-label"> Admission Class</label>
+                          <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+                          (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+                        </ng-select>
+                      </div>
+                      <div class="col-md-4 form-group">
+                          <label class="control-label" >Section</label>
+                    <ng-select [allowClear]="true" [items]="sectionsList" [disabled]="disabled" (data)="refreshSectionValue($event)" (selected)="selectedSection($event)"
+                    (removed)="removedSection($event)" (typed)="typedSection($event)" placeholder="No Section selected">
+                  </ng-select>
+                      </div>
+
+                 
+                        <div class="col-md-3 col-md-offset-1 form-group" style="margin-top: 1em;">
+                              <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addclass.form.valid" value="Add Student">
+            
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+         
+            </div>
+    
+  
+      </card>
+    </div>
+  </div>

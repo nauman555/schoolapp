@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-12">
+      <card cardTitle="Class Section Management">
+      
+          <tab-content for="tab1" tabTitle={{tabtitle}}>
+            <div class="row">
+              <div class="col-lg-5 col-md-6 col-md-offset-3">
+                <card cardTitle="Add New Section">
+                  <form class="form-group" #addclass="ngForm" (ngSubmit)="onClickSubmit(addclass.value)">
+                    <label class="control-label"> Select Class</label>
+                    <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+                    (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+                  </ng-select>
+              
+                    <label class="control-label" style="margin-top:.5em;">Section</label>
+                    <input type="text" style="margin-top:0em;" class="form-control fm-control" name="section" placeholder="Section Name" ngModel>
+  
+                    <label class="control-label" >Teacher</label>
+                    <ng-select [allowClear]="true" [items]="teachersList" [disabled]="disabled" (data)="refreshTValue($event)" (selected)="selectedT($event)"
+                    (removed)="removedT($event)" (typed)="typedT($event)" placeholder="No Teacher selected">
+                  </ng-select>
+  
+                    <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addclass.form.valid" value="Add Section">
+                  </form>
+                </card>
+              </div>
+            </div>
+          </tab-content>
+        </tabset>
+  
+      </card>
+    </div>
+  </div>

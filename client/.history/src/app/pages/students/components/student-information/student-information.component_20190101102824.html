@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-md-12">
+      <card cardTitle="Student ">
+        <tabset id="tab1">
+          <tab-content for="tab1" tabTitle="Section Details" [active]="true">
+            <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="list-group" style="padding-top: 0px; width: -webkit-fill-available;">
+  
+  
+                  <p class="list-group-item" style="background-color:#000000d4; color: white">
+                    <i class="fa fa-university"></i>
+                    <span>Select Class</span>
+                  </p>
+                  <a href="#" class="list-group-item">
+                    <span>Class 2</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 3</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 4</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 5</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 6</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 7</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 8</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                    <span>Class 9</span>
+                  </a>
+  
+                </div>
+              </div>
+              <div class="col-lg-9 col-md-9 col-sm-8">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Section Name</th>
+                      <th>Class </th>
+                      <th>Teacher </th>
+                      <th>Actions</th>
+              
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of classData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                      <td>{{item.firstName}}</td>
+                      <td>{{item.lastName}}</td>
+                      <td>{{item.username}}</td>
+                    
+                      <td>
+                        <span class="label label-info">Edit</span>
+                        <span class="label label-danger">Delete</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+  
+              </div>
+  
+            </div>
+  
+            <form class="pagination-wrapper">
+              <div class="form-group pages">
+                <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                  autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                  screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+              </div>
+  
+            </form>
+          </tab-content>
+          
+        </tabset>
+  
+      </card>
+    </div>
+  </div>

@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-md-12">
+    <card cardTitle="Class Section Management">
+      <tabset id="tab1">
+        <tab-content for="tab1" tabTitle="Section Details" [active]="true">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+              <div class="list-group" style="padding-top: 0px; width: -webkit-fill-available;">
+
+
+                <p class="list-group-item" style="background-color:#000000d4; color: white">
+                  <i class="fa fa-university"></i>
+                  <span>Select Class</span>
+                </p>
+                <a *ngFor="let item of classData " class="list-group-item" style="cursor: pointer;" (click)=getSectionByClassID(item.class_id)>
+                  <span>{{item.class_name}}</span>
+                </a>
+         
+
+              </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-8">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Section Name</th>
+                    <th>Class </th>
+                    <th>Teacher </th>
+                    <th>Actions</th>
+            
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of sectionData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                    <td>{{item.section_name}}</td>
+                    <td>{{item.class_name}}</td>
+                    <td>{{item.teacher_name}}</td>
+                  
+                    <td>
+                      <span class="label label-info" style="cursor: pointer;" (click)=openEditSectionModal(updateSectionModal,item.section_id,item.class_id)>Edit</span>
+                      <span class="label label-danger" style="cursor: pointer;" (click)=deleteSection(item.section_id)>Delete</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+
+          <form class="pagination-wrapper">
+            <div class="form-group pages">
+              <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                screenReaderCurrentLabel="You're on page">
+              </pagination-controls>
+            </div>
+
+          </form>
+        </tab-content>
+        <tab-content for="tab1" tabTitle={{tabtitle}}>
+          <div class="row">
+            <div class="col-lg-5 col-md-6 col-md-offset-3">
+                <alert *ngIf="successNotification" type="success">Section Added Successfully..!</alert>
+              <card cardTitle="Add New Section">
+                <form class="form-group" #addsection="ngForm" (ngSubmit)="onSubmitAddSection(addsection)">
+                  <label class="control-label"> Select Class * </label>
+                  <select class="form-control fm-control" style="margin-top:0em;" #selectedClass [(ngModel)]="class_id" (change)=classRequired(selectedClass.value); name="class_id">
+                      <option [ngValue]="undefined" disabled>Select Class</option>
+                      <option *ngFor="let item of classData" [value]="item.class_id">{{item.class_name}}</option>
+                  </select>
+            
+                  <label class="control-label" style="margin-top:.5em;">Section Name </label>
+                    <span style="color:red;" *ngIf="!pickedSecName.valid && pickedSecName.touched"><small style="margin-left:1em;">  Section Name Required</small> </span>
+                    <span style="color:red;" *ngIf="sectionCheckAlert"><small style="margin-left: 1em;">  Section already registred against class.</small> </span>
+                
+                  <input type="text" style="margin-top:0em;" required class="form-control fm-control" (change)=checkSectionAdded(selectedClass.value,this.section_name)
+                  [(ngModel)]="section_name" name="section_name" placeholder="Section Name" #pickedSecName="ngModel" >
+
+                  <label class="control-label" >Teacher</label>
+                  <select class="form-control fm-control" style="margin-top:0em;" [(ngModel)]="teacher_id" name="teacher_id">
+                      <option [ngValue]="undefined" disabled>Select Teacher</option>
+                      <option *ngFor="let item of teachersData" [value]="item.teacher_id">{{item.teacher_name}}</option>
+                  </select>
+
+                  <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addsection.form.valid ||!disableButton" value="Add Section">
+                </form>
+              </card>
+            </div>
+          </div>
+        </tab-content>
+      </tabset>
+
+    </card>
+  </div>
+</div>
+
+<modal #updateSectionModal modalClass="modal-lg" >
+    <modal-header>
+      <h3>Update Section</h3>
+    </modal-header>
+    <modal-content >
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-md-offset-3">
+                   <alert *ngIf="updateSuccessNotifi" type="success">Section Data Updated Successfully..!</alert>
+                   <card cardTitle="Update Class">
+                      <form class="form-group" #addsection="ngForm" (ngSubmit)="onSubmitUpdateSection(addsection)">
+                          <label class="control-label"> Class  </label>
+                          <input type="text" style="margin-top:0em;" required class="form-control fm-control"
+                          [(ngModel)]="c_name" name="c_name" [disabled]="true" >
+                    
+                          <label class="control-label" style="margin-top:.5em;">Section</label>
+                          <input type="text" style="margin-top:0em;" required class="form-control fm-control" (change)=checkSectionAdded(selectedClass.value,this.section_name)
+                          [(ngModel)]="sec_name" name="sec_name" placeholder="Section Name" #pickedSecName="ngModel" >
+        
+                          <label class="control-label" >Teacher</label>
+                          <select class="form-control fm-control" style="margin-top:0em;" [(ngModel)]="teacher_id" name="teacher_id">
+                              <option [ngValue]="undefined" readonly >{{t_name}}</option>
+                              <option *ngFor="let item of teachersData" [value]="item.teacher_id">{{item.teacher_name}}</option>
+                          </select>
+        
+                          <input type="submit" class="btn btn-info" style="margin-top:1em" [disabled]="!addsection.form.valid ||!disableButton" value="Add Section">
+                        </form>
+                     </card>
+                </div>
+              </div>
+        </div>
+         
+    
+    </modal-content>
+    <modal-footer>
+      <button class="btn btn-primary" (click)="closeModal(updateSectionModal)">close</button>
+    </modal-footer>
+  </modal>
